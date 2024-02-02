@@ -12,21 +12,100 @@ $tasks = getTasks();
     <link rel="stylesheet" href="style.css">
     <title>Task Management System</title>
 </head>
-<body>
-    <h1>Task List</h1>
-    
-    <ul>
-        <?php foreach ($tasks as $task): ?>
-            <li>
-                <?php echo $task['task_name']; ?>
-                <?php if (!$task['is_completed']): ?>
-                    <a href="mark_completed.php?id=<?php echo $task['id']; ?>">Mark as Completed</a>
-                <?php endif; ?>
-                <a href="delete_task.php?id=<?php echo $task['id']; ?>">Delete</a>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+<style>
+/* Add this CSS to style.css */
 
-    <a href="add_task.php">Add New Task</a>
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align:center;
+    border-bottom: 1px solid #ddd;
+    
+}
+td {
+    font-weight: bold;  /* Make content in td bold */
+}
+
+th {
+    background-color: #3498db;
+    color: #fff;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.btn-mark {
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+
+
+</style>
+<body>
+    <div class="container">
+        <center><u><h1>TASK LIST</h1></u></center>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>TASK NAME</th>
+                    <th>STATUS</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($tasks as $task): ?>
+                    <tr>
+                        <td><?php echo $task['task_name']; ?></td>
+                        <td>
+                            <?php if ($task['is_completed']): ?>
+                                <span style="color: #27ae60;">Completed</span>
+                            <?php else: ?>
+                                <span style="color: #e74c3c;">Pending</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if (!$task['is_completed']): ?>
+                                <button class="btn-mark" onclick="markAsCompleted(<?php echo $task['id']; ?>)">Mark Completed</button>
+                            <?php endif; ?>
+                            <button class="btn-delete" onclick="deleteTask(<?php echo $task['id']; ?>)">Delete</button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <center><a href="add_task.php">Add New Task</a><center>
+    </div>
+
+    <script>
+        function markAsCompleted(taskId) {
+            // You can implement the logic to mark the task as completed using AJAX or form submission.
+            alert("Mark as Completed: " + taskId);
+        }
+
+        function deleteTask(taskId) {
+            // You can implement the logic to delete the task using AJAX or form submission.
+            alert("Delete Task: " + taskId);
+        }
+    </script>
 </body>
 </html>
