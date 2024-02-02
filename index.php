@@ -126,9 +126,21 @@ tr:hover {
         }
 
         function deleteTask(taskId) {
-            // You can implement the logic to delete the task using AJAX or form submission.
-            alert("Delete Task: " + taskId);
-        }
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    alert("Task deleted!");
+                    // You might want to update the UI here (remove the deleted task from the table)
+                } else {
+                    alert("Error deleting task");
+                }
+            }
+        };
+
+        xhr.open("GET", "delete_task.php?id=" + taskId, true);
+        xhr.send();
+    }
     </script>
 </body>
 </html>
