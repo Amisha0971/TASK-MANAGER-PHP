@@ -55,7 +55,16 @@ tr:hover {
     padding: 8px 12px;
     cursor: pointer;
 }
-
+.btn-add {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
 
 </style>
@@ -66,15 +75,17 @@ tr:hover {
         <table>
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>TASK NAME</th>
                     <th>STATUS</th>
                     <th>ACTIONS</th>
-                </tr>
+                </tr> 
             </thead>
             <tbody>
                 <?php foreach ($tasks as $task): ?>
                     <tr>
-                        <td><?php echo $task['task_name']; ?></td>
+                    <td><?php echo $task['id']; ?></td>                      
+                      <td><?php echo $task['task_name']; ?></td>
                         <td>
                             <?php if ($task['is_completed']): ?>
                                 <span style="color: #27ae60;">Completed</span>
@@ -92,8 +103,8 @@ tr:hover {
                 <?php endforeach; ?>
             </tbody>
         </table>
-
-        <center><a href="add_task.php">Add New Task</a><center>
+        <br>
+        <center><a href="add_task.php" class="btn-add">Add New Task</a></center>
     </div>
 
     <script>
