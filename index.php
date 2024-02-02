@@ -84,8 +84,8 @@ tr:hover {
             <tbody>
                 <?php foreach ($tasks as $task): ?>
                     <tr>
-                    <td><?php echo $task['id']; ?></td>                      
-                      <td><?php echo $task['task_name']; ?></td>
+                        <td><?php echo $task['id']; ?></td>                      
+                        <td><?php echo $task['task_name']; ?></td>
                         <td>
                             <?php if ($task['is_completed']): ?>
                                 <span style="color: #27ae60;">Completed</span>
@@ -109,8 +109,20 @@ tr:hover {
 
     <script>
         function markAsCompleted(taskId) {
-            // You can implement the logic to mark the task as completed using AJAX or form submission.
-            alert("Mark as Completed: " + taskId);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        alert("Task marked as completed!");
+                        // You might want to update the UI here
+                    } else {
+                        alert("Error marking task as completed");
+                    }
+                }
+            };
+
+            xhr.open("GET", "mark_completed.php?id=" + taskId, true);
+            xhr.send();
         }
 
         function deleteTask(taskId) {
